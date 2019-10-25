@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ToDo List</title>
+  <!-- <link rel="stylesheet" href="src/style.css"> -->
+  
+</head>
+<body>
+    <div id="todoApp">
+      <h1 class="todoTitle">ToDo List</h1>
+      
+      <div class="headOfTodo">
+        <label class="searchByTittle" >
+            <input 
+              type="search"
+              id="inputSearch"  
+              placeholder="search by title">
+        </label>
+        
+        <div class="markOfDoneList open">
+          <button>all</button>
+          <ul>
+            <li>all</li>
+            <li>open</li>
+            <li>done</li>
+          </ul>
+        </div>
+        <div class="todosPriority open">
+          <button>all</button>
+          <ul>
+            <li>all</li>
+            <li>high</li>
+            <li>normal</li>
+            <li>low</li>
+          </ul>
+        </div>
+
+        <button class="btnGreateTodo">Greate</button>
+      </div>
+  
+      <div class="modalWindow">
+        <div class="createTodoContent">
+        <label >
+          Title:
+          <input type="text" placeholder="Title" id="createTodoTitle">
+        </label>
+        <label >
+          Description:
+          <textarea placeholder="Description" id="createTodoDescription" ></textarea>
+        </label>
+        <!-- <label >
+          Priority:
+          <select id='createTodoPriority'>
+            <option value="high">high</option>
+            <option value="normal">normal</option>
+            <option value="low">low</option>
+          </select>
+        </label> -->
+        <div class="createTodoPriority open">
+          <p>Priority:</p>
+          <button>high</button>
+          <ul>
+            <li>high</li>
+            <li>normal</li>
+            <li>low</li>
+          </ul>
+        </div>
+        <div class="btncreateTodoContent">
+            <button class="cancelCreateTodo">Cancel</button>
+            <button class="saveTodo">Save</button>
+        </div>
+      </div>
+      </div>
+      
+      <ul class="todoList"></ul>
+      <footer >
+        <h3 class='footerTodoApp'>Kotvitskyi Aleksei</h3>
+      </footer>
+    </div>
+
+    <script src="dist/main.js"></script>
+</body>
+</html>
+
+
+
+
+

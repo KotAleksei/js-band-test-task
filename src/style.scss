@@ -1,0 +1,317 @@
+%dropdownEditTodoPseudo {
+  position: absolute;
+  content: '';
+  top: 25px;
+  border-bottom: 1px solid black;
+  width: 18px;
+  height: 10px;
+  z-index: 1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+}
+
+.headOfTodo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 90px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.todoTitle {
+  border-bottom: 1px solid black;
+  padding-left: 20px;
+}
+
+.searchByTittle {
+  position: relative;
+  &:before {
+    position: absolute;
+    content: "🔍";
+    font-size: 15px;
+    left: 5px;
+    top: 5px;
+  }
+  > input {
+    padding: 5px 5px 5px 25px;
+    border: 1px solid black;
+  }
+}
+
+.markOfDoneList,
+.todosPriority {
+  width: 150px;
+  position: relative;
+  > button {
+    width: 100%;
+    position: relative;
+    height: 28px;
+    &:hover {
+      cursor: pointer;
+    }
+    &:before {
+      content: '▼';
+      position: absolute;
+      right: 10px;
+    }
+  }
+  > ul {
+    display: none;
+    list-style: none;
+  }
+  &.open > ul{
+    width: 150px;
+    margin: 0;
+    border: 1px solid black;
+    display: block;
+    position: absolute;
+    padding: 0;
+    > li {
+      padding-left: 10px;
+      background-color: white;
+      &:hover {
+        cursor: pointer;
+        background-color: lightblue;
+      }
+    }
+  }
+}
+
+/* ///////////////////////// */
+/* MODAL WINDOW */
+/* ///////////////////////// */
+
+.btnGreateTodo {
+  background-color: white;
+  border: 1px solid black;
+  width: 150px;
+  height: 28px;
+  border-radius: 10px;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+    background-color: lightblue;
+  }
+}
+
+.modalWindow {
+  &.show {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 0;
+    padding: 0;
+  }
+  display: none;
+}
+
+.createTodoContent {
+  padding-top: 20px;
+  width: 300px;
+  min-height: 350px;
+  border: 1px solid black;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  position: relative;
+  > label {
+    margin-left: 50px;
+    > {
+      input, textarea {
+        display: block;
+        width: 150px;
+        margin: 5px 75px 5px;
+      }
+    }
+  }
+}
+
+.createTodoPriority {
+  margin-left: 50px;
+  width: 150px;
+  > {
+    button {
+      width: 100%;
+      margin-left: 25px;
+      position: relative;
+      &:hover {
+        cursor: pointer;
+      }
+      &:before {
+        position: absolute;
+        content: '▼';
+        top: 1px;
+        right: 5px;
+      }
+    }
+    ul {
+      display: none;
+    }
+  }
+  &.open > ul {
+    display: block;
+    list-style: none;
+    margin: 0 auto 0px 25px;
+    border: 1px solid black;
+    width: 100%;
+    padding: 0;
+    > li {
+      padding-left: 20px;
+      &:hover {
+        cursor: pointer;
+        background-color: lightblue;
+      }
+    }
+  }
+}
+
+.btncreateTodoContent {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  > button {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: white;
+    &:hover {
+      cursor: pointer;
+      background-color: lightblue;
+      transform: scale(1.1);
+    }
+  }
+}
+
+/* ///////////////////////// */
+/* TODO LIST */
+/* ///////////////////////// */
+
+.todoList {
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+
+.todoItem {
+  display: none;
+  position: relative;
+  border: 1px solid black;
+  width: 300px;
+  min-height: 250px;
+  margin-bottom: 20px;
+  margin-right: 40px;
+  word-wrap: break-word;
+  &.show {
+    display: block;
+  }
+  &.done::before {
+    position: absolute;
+    content: '🗹';
+    top: -5px;
+    right: 0px;
+    background-color: white;
+    height: 14px;
+    transform: scale(1.4);
+    color: green;
+  }
+  > {
+    h2, p {
+      padding-left: 20px;
+    }
+  }
+}
+
+.todoFotter {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  bottom: 20px;
+  width: 100%;
+  height: 28px;
+}
+
+.todoPriority {
+  border: 3px dashed black;
+  border-radius: 10px;
+  padding: 10px;
+  padding-top: 0px;
+}
+
+.dropdownEditTodo {
+  position: relative;
+  width: 40px;
+  > button {
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 28px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &.open {
+    > ul {
+      display: block;
+      position: absolute;
+      top: 40px;
+      left: -40px;
+      list-style: none;
+      width: 80px;
+      margin: 0;
+      padding: 0;
+      border: 1px solid black;
+      text-align: center;
+      background-color: white;
+      z-index: 1;
+    }
+    &::before {
+      @extend %dropdownEditTodoPseudo;
+      left: 20px;
+      transform: rotate(45deg);
+    }
+    &::after {
+      @extend %dropdownEditTodoPseudo;
+      left: 0px;
+      transform: rotate(-45deg);
+    }
+  }
+  > ul {
+    display: none;
+    > li:hover {
+      cursor: pointer;
+      background-color: lightblue;
+    }
+  }
+}
+
+.footerTodoApp {
+  position: fixed;
+  border-top: 1px solid black;
+  width: 100%;
+  padding: 10px 0 10px 10px;
+  margin: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 1;
+}
