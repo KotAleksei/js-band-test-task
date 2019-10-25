@@ -70,12 +70,12 @@ function editTodo(item) {
 }
 
 function sortedRender(sortBy) {
-  todos.map(item => {
+  todos.forEach(item => {
     const itemTodo = document.querySelector(`[data-key='${item.id}']`);
     const itemPriority = document.querySelector(`[data-priority='${item.id}']`);
     const visibleTodo = itemTodo.classList.contains('show');
     const todoDone = itemTodo.classList.contains('done');
-
+    
     if(sortBy.searchText !== ''){
       if(!item.title.includes(sortBy.searchText)){
         itemTodo.classList.remove('show');
@@ -91,46 +91,46 @@ function sortedRender(sortBy) {
         itemTodo.classList.remove('show');
       }
     } 
-
-    if(sortBy.completed !== 'all'){
-      if(sortBy.completed === 'open'){
+ 
+    switch(sortBy.completed) {
+      case 'open': {
         if(todoDone) {
           itemTodo.classList.remove('show');
         }
-      } else if(sortBy.completed === 'done') {
+        break;
+      }
+      case 'done': {
         if(!todoDone) {
           itemTodo.classList.remove('show');
         }
+        break;
       }
-    } 
-
+    }
   });
 }
 
-
-
 todoList.addEventListener('click', event => {
-  if(event.target.tagName === 'LI') {
-    const callDropdownItem = item => {
-      const todoItem = event.target.parentElement.parentElement.parentElement.parentElement;
-      const itemKey = todoItem.dataset.key;
-      switch (item) {
-        case 'delete': { 
-          deleteTodo(itemKey);
-          break;
-        }
-        case 'done': {
-          toggleDoneTodo(itemKey);
-          break;
-        }
-        case 'edit': {
-          const findTodo = todos.find(item => Number(item.id) === Number(itemKey));
-          greateTodoModal(null, findTodo);
-          break;
-        }
+  let itsFindNode = event.target.parentElement !== todoList;
+
+  if(event.target.tagName === 'LI' && itsFindNode) {
+    const todoItem = event.target.parentElement.parentElement.parentElement.parentElement;
+    const itemKey = todoItem.dataset.key;
+
+    switch (event.target.textContent) {
+      case 'delete': { 
+        deleteTodo(itemKey);
+        break;
       }
-    };
-    callDropdownItem(event.target.textContent);
+      case 'done': {
+        toggleDoneTodo(itemKey);
+        break;
+      }
+      case 'edit': {
+        const findTodo = todos.find(item => Number(item.id) === Number(itemKey));
+        greateTodoModal(null, findTodo);
+        break;
+      }
+    }
   }
 });
 
