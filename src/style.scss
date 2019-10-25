@@ -19,7 +19,6 @@ html, body {
 .headOfTodo {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   margin-bottom: 90px;
   margin-left: 40px;
   margin-right: 40px;
@@ -314,4 +313,20 @@ html, body {
   bottom: 0;
   background-color: white;
   z-index: 1;
+}
+
+@media (max-width: 750px) {
+  .headOfTodo {
+    flex-direction: column;
+    align-items: center;
+    .markOfDoneList {
+      margin-top: 20px;
+    }
+    .todosPriority {
+      margin-top: 70px;
+    }
+    .btnGreateTodo {
+      margin-top: 100px;
+    }
+  }
 }
