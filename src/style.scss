@@ -20,6 +20,8 @@
 
 html, body {
   margin: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .headOfTodo {
@@ -133,16 +135,22 @@ html, body {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  position: relative;
   > label {
     margin-left: 25px;
-    > input {
-        @extend %inputAndTextInModal;
-      } 
-    > textarea {
-        @extend %inputAndTextInModal;
-        resize: none;
-        height: 70px;
+      > div {
+        .emptyTitle {
+          color: red;
+          margin: 0;
+          padding-left: 25px;
+        }
+        > input {
+          @extend %inputAndTextInModal;
+        } 
+        > textarea {
+          @extend %inputAndTextInModal;
+          resize: none;
+          height: 70px;
+        }
       }
   }
 }
@@ -351,3 +359,4 @@ html, body {
     }
   }
 }
+

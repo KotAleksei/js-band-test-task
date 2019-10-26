@@ -40,30 +40,38 @@
         <button class="btnGreateTodo">Сreate</button>
       </div>
   
-      <div class="modalWindow">
-        <div class="createTodoContent">
-        <label >
-          Title:
-          <input type="text" placeholder="Title" id="createTodoTitle">
-        </label>
-        <label >
-          Description:
-          <textarea placeholder="Description" id="createTodoDescription" ></textarea>
-        </label>
-        <div class="createTodoPriority open">
-          <p>Priority:</p>
-          <button>high</button>
-          <ul>
-            <li>high</li>
-            <li>normal</li>
-            <li>low</li>
-          </ul>
-        </div>
-        <div class="btncreateTodoContent">
-            <button class="cancelCreateTodo">Cancel</button>
-            <button class="saveTodo">Save</button>
-        </div>
-      </div>
+      <div class="modalWindow" tabindex="0">
+        <form class="createTodoContent">
+          <label >
+            Title:
+            <div>
+                <input 
+                type="text" 
+                placeholder="Title" 
+                id="createTodoTitle" 
+                title="please fill this field">
+            </div>
+          </label>
+          <label >
+            Description:
+            <div>
+                <textarea placeholder="Description" id="createTodoDescription" ></textarea>
+            </div>
+          </label>
+            <div class="createTodoPriority open">
+              <p>Priority:</p>
+              <button type="button">high</button>
+              <ul >
+                <li>high</li>
+                <li>normal</li>
+                <li>low</li>
+              </ul>
+            </div>
+          <div class="btncreateTodoContent">
+              <button class="cancelCreateTodo" type="reset">Cancel</button>
+              <button class="saveTodo" type="submit">Save</button>
+          </div>
+        </form>
       </div>
       
       <ul class="todoList"></ul>

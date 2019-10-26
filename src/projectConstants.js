@@ -10,6 +10,7 @@ const todoList = document.querySelector('.todoList');
 const markOfDoneList = document.querySelector('.markOfDoneList');
 const todosPriorityList = document.querySelector('.todosPriority');
 const searchInput = document.getElementById('inputSearch');
+const createTodoContent = document.querySelector('.createTodoContent');
 
 
 export {
@@ -24,5 +25,6 @@ export {
   todoList,
   markOfDoneList,
   todosPriorityList,
-  searchInput
+  searchInput,
+  createTodoContent
 };
