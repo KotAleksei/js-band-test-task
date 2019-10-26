@@ -6,7 +6,7 @@ const TODOS_CONST = 'todos';
 let localStoreTodos = localStorage.getItem(TODOS_CONST);
 let todos = localStoreTodos
               ? JSON.parse(localStoreTodos)
-                .sort((x,y) => (x.done === y.done) ? 0 : x.done ? -1 : 1)
+                .sort((x,y) => y.done - x.done)
               : [];
 
 if(todos.length > 0 ) renderTodos();

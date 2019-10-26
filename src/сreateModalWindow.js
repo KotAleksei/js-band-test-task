@@ -19,8 +19,8 @@ function createTodoModal(event, hasEditTodo) {
   let todo = {};
 
         // functions for listeners
-  const callChangeTodoTitle = inputEvent => todo.title = inputEvent.target.value;
-  const callChangeTodoDescription = inputEvent => todo.description = inputEvent.target.value;
+  const callChangeTodoTitle = inputEvent => todo.title = inputEvent.target.value.trim();
+  const callChangeTodoDescription = inputEvent => todo.description = inputEvent.target.value.trim();
   const callTodoPriority = clickEvent => {
     let TODO_PRIORITY = '';
     
