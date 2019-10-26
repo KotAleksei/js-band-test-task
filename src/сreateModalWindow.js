@@ -1,7 +1,6 @@
 import { 
   createModalWindow,
   cancelCreateTodo,
-  saveTodo,
   todoTitle,
   todoDescription,
   todoPriority,
@@ -15,28 +14,38 @@ import {
 
 btnGreateTodo.addEventListener('click', createTodoModal);
 
-function createTodoModal(event, item) {
+function createTodoModal(event, hasEditTodo) {
   createModalWindow.classList.add('show');
-  
   let todo = {};
+
         // functions for listeners
   const callChangeTodoTitle = inputEvent => todo.title = inputEvent.target.value;
   const callChangeTodoDescription = inputEvent => todo.description = inputEvent.target.value;
-  
+  const callTodoPriority = clickEvent => {
+    let TODO_PRIORITY = '';
+    
+    if(clickEvent.target.tagName === 'BUTTON'){
+      todoPriority.classList.toggle('open');
+    }
+    if(clickEvent.target.tagName === 'LI') {
+      TODO_PRIORITY = clickEvent.target.textContent;
+      todoPriority.children[1].innerText = TODO_PRIORITY;
+      todo.priority = TODO_PRIORITY;
+    }
+  }
   const callCancelTodo = () => {
     const hasEmptyTitleMessage = document.querySelector('.emptyTitle');
+
     resetData();
     removeListeners();
     createModalWindow.classList.remove('show');
-    
     hasEmptyTitleMessage ? hasEmptyTitleMessage.remove() : null;
   }
-
-  const callSubmit = event => {
-    event.preventDefault();
-
+  const callSubmit = submitEvent => {
     const hasEmptyTitleMessage = document.querySelector('.emptyTitle');
     const errorText = 'Please Enter This Field';
+    
+    submitEvent.preventDefault();
     if(todo.title === '') {
       if(!hasEmptyTitleMessage) {
         todoTitle.insertAdjacentHTML('beforebegin', `
@@ -44,32 +53,17 @@ function createTodoModal(event, item) {
       `);
       }
     } else {
-      item ? editTodo(todo) : addTodo(todo); 
+      hasEditTodo ? editTodo(todo) : addTodo(todo); 
       resetData();
       removeListeners();
       createModalWindow.classList.remove('show');
       hasEmptyTitleMessage ? hasEmptyTitleMessage.remove() : null;
     }
   }
-
-  
-  const callTodoPriority = event => {
-    let TODO_PRIORITY = '';
-    
-    if(event.target.tagName === 'BUTTON'){
-      todoPriority.classList.toggle('open');
-    }
-    if(event.target.tagName === 'LI') {
-      TODO_PRIORITY = event.target.textContent;
-      todoPriority.children[1].innerText = TODO_PRIORITY;
-      todo.priority = TODO_PRIORITY;
-    }
-  }
-
   const setTitleFocus = () => todoTitle.focus();
   
-  if(item) {
-    todo = { ...item };
+  if(hasEditTodo) {
+    todo = { ...hasEditTodo };
     todoTitle.value = todo.title;
     todoDescription.value = todo.description;
     todoPriority.children[1].innerText = todo.priority;
@@ -85,18 +79,18 @@ function createTodoModal(event, item) {
   }
   
   window.setTimeout(setTitleFocus, 0);
-  cancelCreateTodo.addEventListener('click', callCancelTodo);
   todoTitle.addEventListener('input', callChangeTodoTitle);
   todoDescription.addEventListener('input', callChangeTodoDescription);
   todoPriority.addEventListener('click', callTodoPriority);
+  cancelCreateTodo.addEventListener('click', callCancelTodo);
   createTodoContent.addEventListener('submit', callSubmit);
 
-  // remove Listners and reset Data for new modal window
+  // remove Listeners and reset Data for new modal window
   function removeListeners() {
-    cancelCreateTodo.removeEventListener('click', callCancelTodo);
     todoTitle.removeEventListener('input', callChangeTodoTitle);
     todoDescription.removeEventListener('input', callChangeTodoDescription);
     todoPriority.removeEventListener('click', callTodoPriority);
+    cancelCreateTodo.removeEventListener('click', callCancelTodo);
     createTodoContent.removeEventListener('submit', callSubmit);
   }
   function resetData () {
@@ -105,7 +99,6 @@ function createTodoModal(event, item) {
     todoPriority.children[1].innerText = 'high';
     todoPriority.classList.contains('open') ? null : todoPriority.classList.add('open');
   }
-
 }
 
 export default createTodoModal;
