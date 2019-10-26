@@ -1,5 +1,5 @@
 import { 
-  createTodo,
+  createModalWindow,
   cancelCreateTodo,
   saveTodo,
   todoTitle,
@@ -12,9 +12,9 @@ import {
   editTodo,
 } from './todoLogic';
 
-btnGreateTodo.addEventListener('click', greateTodoModal);
+btnGreateTodo.addEventListener('click', createTodoModal);
 
-function greateTodoModal(event, item) {
+function createTodoModal(event, item) {
   let todo = {};
   if(item) {
     todo = { ...item };
@@ -44,13 +44,13 @@ function greateTodoModal(event, item) {
                                       // should call editTodo, otherwise addTodo func
     resetData();
     removeListeners();
-    createTodo.classList.remove('show');
+    createModalWindow.classList.remove('show');
   }
 
   function callCancelTodo() {
     resetData();
     removeListeners();
-    createTodo.classList.remove('show');
+    createModalWindow.classList.remove('show');
   }
 
   function callTodoTitle(event) {
@@ -88,7 +88,7 @@ function greateTodoModal(event, item) {
     todoPriority.classList.contains('open') ? null : todoPriority.classList.add('open');
   }
 
-  createTodo.classList.add('show');
+  createModalWindow.classList.add('show');
 }
 
-export default greateTodoModal;
+export default createTodoModal;

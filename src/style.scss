@@ -8,6 +8,12 @@
   z-index: 1;
 }
 
+%inputAndTextInModal {
+  display: block;
+  width: 250px;
+  margin: 5px 25px 5px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -129,25 +135,29 @@ html, body {
   transform: translate(-50%, -50%);
   position: relative;
   > label {
-    margin-left: 50px;
-    > {
-      input, textarea {
-        display: block;
-        width: 150px;
-        margin: 5px 75px 5px;
+    margin-left: 25px;
+    > input {
+        @extend %inputAndTextInModal;
+      } 
+    > textarea {
+        @extend %inputAndTextInModal;
+        resize: none;
+        height: 70px;
       }
-    }
   }
 }
 
 .createTodoPriority {
-  margin-left: 50px;
-  width: 150px;
+  margin-left: 25px;
+  width: 250px;
+  text-transform: capitalize;
   > {
     button {
       width: 100%;
-      margin-left: 25px;
       position: relative;
+      text-transform: capitalize;
+      text-align: left;
+      padding-left: 20px;
       &:hover {
         cursor: pointer;
       }
@@ -165,7 +175,7 @@ html, body {
   &.open > ul {
     display: block;
     list-style: none;
-    margin: 0 auto 0px 25px;
+    margin: 0 auto 70px 0px;
     border: 1px solid black;
     width: 100%;
     padding: 0;
@@ -176,6 +186,9 @@ html, body {
         background-color: lightblue;
       }
     }
+  }
+  > p {
+    margin: 0;
   }
 }
 
@@ -213,19 +226,21 @@ html, body {
 
 .todoItem {
   display: none;
-  position: relative;
-  border: 1px solid black;
-  width: 300px;
-  min-height: 250px;
-  margin-bottom: 20px;
-  margin-right: 40px;
-  word-wrap: break-word;
+
   &.show {
     display: block;
+    position: relative;
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+    margin-right: 40px;
+    word-wrap: break-word;
+    // overflow: auto;
   }
   &.done::before {
     position: absolute;
-    content: '🗹';
+    content: "🗹";
     top: -5px;
     right: 0px;
     background-color: white;
@@ -233,11 +248,17 @@ html, body {
     transform: scale(1.4);
     color: green;
   }
-  > {
-    h2, p {
-      padding-left: 20px;
-    }
+  > h2 {
+    padding-left: 20px;
+    height: 50px;
+    overflow: auto;
   }
+  > p {
+    padding-left: 20px;
+    height: 140px;
+    overflow: auto;
+  }
+  
 }
 
 .todoFotter {

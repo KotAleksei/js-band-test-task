@@ -1,5 +1,5 @@
 const toDoApp = document.getElementById('todoApp');
-const createTodo = document.querySelector('.modalWindow');
+const createModalWindow = document.querySelector('.modalWindow');
 const cancelCreateTodo = document.querySelector('.cancelCreateTodo');
 const saveTodo = document.querySelector('.saveTodo');
 const todoTitle = document.getElementById('createTodoTitle');
@@ -14,7 +14,7 @@ const searchInput = document.getElementById('inputSearch');
 
 export {
   toDoApp,
-  createTodo,
+  createModalWindow,
   cancelCreateTodo,
   saveTodo,
   todoTitle,

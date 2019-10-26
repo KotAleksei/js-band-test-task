@@ -1,5 +1,5 @@
 import './todoLogic';
-import './greateTodoModal';
+import './сreateModalWindow';
 import './sorted';
 import './style.scss';
 

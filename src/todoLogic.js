@@ -1,7 +1,7 @@
 import {
   todoList
 } from './projectConstants';
-import greateTodoModal from './greateTodoModal';
+import createTodoModal from './сreateModalWindow';
 let todos = [];
 
 function addTodo(todo) {
@@ -43,7 +43,7 @@ function toggleDoneTodo(key) {
   const todo = document.querySelector(`[data-key='${key}']`);
   const findTodo = todos.find(item => Number(item.id) === Number(key));
   
-  // reversal todoItem in DOM
+  // reverse todoItems in DOM
   todo.remove();
   todo.classList.contains('done') ? todoList.prepend(todo) : todoList.append(todo);
   todo.classList.toggle('done');
@@ -127,7 +127,7 @@ todoList.addEventListener('click', event => {
       }
       case 'edit': {
         const findTodo = todos.find(item => Number(item.id) === Number(itemKey));
-        greateTodoModal(null, findTodo);
+        createTodoModal(null, findTodo);
         break;
       }
     }
