@@ -2,27 +2,34 @@ import {
   todoList
 } from './projectConstants';
 import createTodoModal from './сreateModalWindow';
-let todos = [];
+const TODOS_CONST = 'todos';
+let localStoreTodos = localStorage.getItem(TODOS_CONST);
+let todos = localStoreTodos
+              ? JSON.parse(localStoreTodos)
+                .sort((x,y) => (x.done === y.done) ? 0 : x.done ? -1 : 1)
+              : [];
 
-function addTodo(todo) {
-      todos.push(todo);
-      todoList.insertAdjacentHTML('afterbegin', `
-      <li class="todoItem show" data-key="${todo.id}">
-        <h2>${todo.title}</h2>
-        <p>${todo.description}</p>
-        <div class="todoFotter">
-          <div class="todoPriority" data-priority="${todo.id}">${todo.priority}</div>
-          <div class="dropdownEditTodo">
-          <button data-id="${todo.id}">...</button>
-          <ul>
-            <li>done</li>
-            <li>edit</li>
-            <li>delete</li>
-          </ul>
-        </div>
-        </div>
-      </li>
-    `);
+if(todos.length > 0 ) renderTodos();
+
+function renderTodo(todo) {
+  let itsDoneTodo = todo.done ? 'done' : '';
+  todoList.insertAdjacentHTML('afterbegin', `
+  <li class="todoItem show ${itsDoneTodo}" data-key="${todo.id}">
+    <h2>${todo.title}</h2>
+    <p>${todo.description}</p>
+    <div class="todoFotter">
+      <div class="todoPriority" data-priority="${todo.id}">${todo.priority}</div>
+      <div class="dropdownEditTodo">
+      <button data-id="${todo.id}">...</button>
+      <ul>
+        <li>done</li>
+        <li>edit</li>
+        <li>delete</li>
+      </ul>
+    </div>
+    </div>
+  </li>
+  `);
   const dropdown = document.querySelector(`[data-id='${todo.id}']`);
   const nextNode = dropdown.nextElementSibling;
   dropdown.addEventListener('click', () => {
@@ -32,11 +39,20 @@ function addTodo(todo) {
     dropdown.parentElement.classList.toggle('open');
   });
 }
+function renderTodos() {
+  todos.forEach(todo => renderTodo(todo));
+}
+
+function addTodo(todo) {
+      todos.push(todo);
+      localStorage.setItem(TODOS_CONST, JSON.stringify(todos));
+      renderTodo(todo);
+}
 
 function deleteTodo(key) {
   const todo = document.querySelector(`[data-key='${key}']`);
   todos = todos.filter(todo => Number(todo.id) !== Number(key));
-
+  localStorage.setItem(TODOS_CONST, JSON.stringify(todos));
   todo.remove();
 }
 function toggleDoneTodo(key) {
@@ -50,6 +66,7 @@ function toggleDoneTodo(key) {
 
   // change todo.done in todos
   findTodo.done = todo.classList.contains('done');
+  localStorage.setItem(TODOS_CONST, JSON.stringify(todos));
 }
 function editTodo(item) {
   const todo = document.querySelector(`[data-key='${item.id}']`);
@@ -67,6 +84,7 @@ function editTodo(item) {
     }
     return todoItem;
   });
+  localStorage.setItem(TODOS_CONST, JSON.stringify(todos));
 }
 
 function sortedRender(sortBy) {
@@ -111,7 +129,6 @@ function sortedRender(sortBy) {
 
 todoList.addEventListener('click', event => {
   let itsFindNode = event.target.parentElement !== todoList;
-
   if(event.target.tagName === 'LI' && itsFindNode) {
     const todoItem = event.target.parentElement.parentElement.parentElement.parentElement;
     const itemKey = todoItem.dataset.key;
