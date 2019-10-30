@@ -14,17 +14,17 @@ const sortBy = {
 };
 
 function dropDown(elem) {
-  let TITLE_DROPDOWN = 'all';
+  let titleDropdownText = 'all';
   elem.addEventListener('click', (event) => {
-    TITLE_DROPDOWN = event.target.textContent;
-    elem.children[0].innerText = TITLE_DROPDOWN;
+    titleDropdownText = event.target.textContent;
+    elem.children[0].innerText = titleDropdownText;
   
     if(elem === markOfDoneList) {
-      sortBy.completed = TITLE_DROPDOWN;
+      sortBy.completed = titleDropdownText;
       sortedRender(sortBy);
     }
     if(elem === todosPriorityList) {
-      sortBy.priority = TITLE_DROPDOWN;
+      sortBy.priority = titleDropdownText;
       sortedRender(sortBy);
     }
     if(event.target.tagName === 'BUTTON'){

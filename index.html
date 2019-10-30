@@ -8,10 +8,11 @@
   
 </head>
 <body>
-    <div class="backgroundTop"></div>
-    <div id="todoApp">   
+  <div id="todoApp">   
+    <header>
       <h1 class="todoTitle">ToDo List</h1>
-      
+    </header>
+    <main>
       <div class="headOfTodo">
         <label class="searchByTittle" >
             <input 
@@ -20,22 +21,24 @@
               placeholder="search by title">
         </label>
         
-        <div class="markOfDoneList open">
-          <button>all</button>
-          <ul>
-            <li>all</li>
-            <li>open</li>
-            <li>done</li>
-          </ul>
-        </div>
-        <div class="todosPriority open">
-          <button>all</button>
-          <ul>
-            <li>all</li>
-            <li>high</li>
-            <li>normal</li>
-            <li>low</li>
-          </ul>
+        <div class="dropdownList">
+          <div class="markOfDoneList open">
+            <button>all</button>
+            <ul>
+              <li>all</li>
+              <li>open</li>
+              <li>done</li>
+            </ul>
+          </div>
+          <div class="todosPriority open">
+            <button>all</button>
+            <ul>
+              <li>all</li>
+              <li>high</li>
+              <li>normal</li>
+              <li>low</li>
+            </ul>
+          </div>
         </div>
 
         <button class="btnGreateTodo">Сreate</button>
@@ -76,11 +79,11 @@
       </div>
       
       <ul class="todoList"></ul>
-      <footer >
-        <h3 class='footerTodoApp'>Aleksei Kotvitskyi</h3>
-      </footer>
-    </div>
-    <div class="backgroundBottom"></div>
+    </main>
+    <footer >
+      <h3 class='footerTodoApp'>Aleksei Kotvitskyi</h3>
+    </footer>
+  </div>
     
     <script src="dist/main.js"></script>
 </body>
