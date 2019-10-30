@@ -1,7 +1,8 @@
-let path = require('path');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 let conf = {
-  entry: './src/index.js',
+  entry: './src/js/index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'main.js',
@@ -11,6 +12,11 @@ let conf = {
     compress: true,
     port: 8080
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    })
+  ],
   module: {
     rules: [
       {
@@ -21,15 +27,27 @@ let conf = {
         }
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(sa|sc)ss$/,
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
+          MiniCssExtractPlugin.loader,
+          { loader: "css-loader", options: {} },
+          {
+            loader: "postcss-loader",
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer'),
+                require('cssnano')({
+                  preset: 'default',
+                })
+              ]
+            }
+          },
+          { loader: "sass-loader", options: {} }
         ],
       },
     ]
-  },
+  }
 };
 
 module.exports = (env, options) => {
