@@ -2,7 +2,9 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 let conf = {
-  entry: './src/js/index.js',
+  entry: {
+    main: ['./src/js/index.js', './src/scss/style.scss'],
+  }, 
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'main.js',
@@ -30,7 +32,7 @@ let conf = {
         test: /\.(sa|sc)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: "css-loader", options: {} },
+          "css-loader",
           {
             loader: "postcss-loader",
             options: {
@@ -43,7 +45,7 @@ let conf = {
               ]
             }
           },
-          { loader: "sass-loader", options: {} }
+          "sass-loader"
         ],
       },
     ]

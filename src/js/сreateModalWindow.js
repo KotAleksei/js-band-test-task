@@ -43,7 +43,7 @@ function createTodoModal(event, hasEditTodo) {
   }
   const callSubmit = submitEvent => {
     const hasEmptyTitleMessage = document.querySelector('.emptyTitle');
-    const errorText = 'Please Enter This Field';
+    const errorText = 'Please fill this field';
     
     submitEvent.preventDefault();
     if(todo.title === '') {
