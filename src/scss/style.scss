@@ -271,6 +271,7 @@ main {
   list-style: none;
   flex-wrap: wrap;
   margin-bottom: 50px;
+  margin-left: 40px;
 }
 
 .todoItem {
@@ -283,7 +284,7 @@ main {
     width: 250px;
     height: 300px;
     margin-bottom: 20px;
-    margin-right: 40px;
+    margin-right: 30px;
     word-wrap: break-word;
   }
   &.done {
@@ -412,5 +413,8 @@ main {
     .btnGreateTodo {
       margin-top: 100px;
     }
+  }
+  .todoList {
+    justify-content: center;
   }
 }
