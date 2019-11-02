@@ -1,12 +1,15 @@
 {
   "name": "ciklum_js_band",
+  "homepage": "https://kotaleksei.github.io/tech_task_ciklum/",
   "version": "1.0.0",
   "description": "",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --mode development --open --config webpack/webpack.config.js",
     "build": "webpack --mode production --config webpack/webpack.config.js",
-    "eslint": "./node_modules/.bin/eslint "
+    "eslint": "./node_modules/.bin/eslint ",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "Kot_Aleksei",
   "license": "ISC",
@@ -36,5 +39,8 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "gh-pages": "^2.1.1"
   }
 }
