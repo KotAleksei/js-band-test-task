@@ -1,23 +1,28 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-let conf = {
+const conf = {
   entry: {
-    main: ['./src/js/index.js', './src/scss/style.scss'],
+    main: [
+      './src/js/index.js',
+      './src/scss/style.scss',
+    ],
   }, 
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'main.js',
-    publicPath: 'dist/'
+    path: path.resolve(__dirname, '../build'),
+    filename: '[name].js'
   },
   devServer: {
-    compress: true,
     port: 8080
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../public/index.html'),
+    }),
     new MiniCssExtractPlugin({
-      filename: 'style.css'
-    })
+      filename: '[name].css',
+    }),
   ],
   module: {
     rules: [
@@ -26,6 +31,15 @@ let conf = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            minimize: true
+          }
         }
       },
       {
@@ -39,9 +53,7 @@ let conf = {
               ident: 'postcss',
               plugins: [
                 require('autoprefixer'),
-                require('cssnano')({
-                  preset: 'default',
-                })
+                require('cssnano')
               ]
             }
           },
@@ -53,6 +65,7 @@ let conf = {
 };
 
 module.exports = (env, options) => {
+  
   let production = options.mode === 'production';
   conf.devtool = production ? false : 'eval-sourcemap';
   return conf;
